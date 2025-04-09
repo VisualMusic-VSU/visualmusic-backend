@@ -1,28 +1,41 @@
 plugins {
-	java
-	id("org.springframework.boot") version "3.4.4"
-	id("io.spring.dependency-management") version "1.1.7"
+    java
+    id("org.springframework.boot") version libs.versions.spring apply false
+    id("io.spring.dependency-management") version libs.versions.springDependencyManagement
 }
 
-group = "app.visualmusic"
-version = "0.0.1-SNAPSHOT"
+subprojects {
+    group = "app.visualmusic"
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
+    repositories {
+        mavenCentral()
+    }
 
-repositories {
-	mavenCentral()
-}
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
 
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${libs.versions.spring}")
+        }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+        dependencies {
+            dependencySet("org.mapstruct:${libs.versions.mapstruct}") {
+                entry("mapstruct")
+                entry("mapstruct-processor")
+            }
+
+            dependency("org.projectlombok:${libs.versions.lombokMapstructBinding}")
+        }
+
+    }
+
+    dependencies {
+        annotationProcessor("org.projectlombok:lombok")
+
+        compileOnly("org.projectlombok:lombok")
+    }
 }
