@@ -1,11 +1,14 @@
 plugins {
     java
-    id("org.springframework.boot") version libs.versions.spring apply false
-    id("io.spring.dependency-management") version libs.versions.springDependencyManagement
+    id("org.springframework.boot") version "3.4.4" apply false
+    id("io.spring.dependency-management") version "1.1.7"
 }
 
 subprojects {
     group = "app.visualmusic"
+
+    apply(plugin = "java")
+    apply(plugin = "io.spring.dependency-management")
 
     repositories {
         mavenCentral()
@@ -19,16 +22,16 @@ subprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:${libs.versions.spring}")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.4")
         }
 
         dependencies {
-            dependencySet("org.mapstruct:${libs.versions.mapstruct}") {
+            dependencySet("org.mapstruct:1.5.5.Final") {
                 entry("mapstruct")
                 entry("mapstruct-processor")
             }
 
-            dependency("org.projectlombok:${libs.versions.lombokMapstructBinding}")
+            dependency("org.projectlombok:lombok-mapstruct-binding:0.2.0")
         }
 
     }
