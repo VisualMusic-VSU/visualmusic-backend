@@ -61,13 +61,13 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.DEPLOY_SERVER_HOST }}
 
-      - name: Copy docker-compose.yml
+      - name: Copy docker-compose.yaml
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
             mkdir -p visualmusic/backend/
           EOF
           scp -o StrictHostKeyChecking=no \
-            docker-compose.yml \
+            docker-compose.yaml \
             ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:./visualmusic/backend/
 
       - name: Deploy to server
