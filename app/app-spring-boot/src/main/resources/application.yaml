@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: visualmusic
+
+  liquibase:
+    enabled: false
+
+app:
+  auth:
+    datasource:
+      url: ${AUTH_POSTGRES_URL}
+      username: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+      class-driver: org.postgresql.Driver
+
+    liquibase:
+      change-log: classpath:/db/changelog/auth/main-changelog.yaml
+
+  jwt:
+    access-secret: ${JWT_ACCESS_SECRET}
+    access-token-expiration: PT5M
+    refresh-secret: ${JWT_REFRESH_SECRET}
+    refresh-token-expiration: P30D
