@@ -85,8 +85,7 @@ jobs:
           echo "JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./visualmusic/backend/.env
           echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./visualmusic/backend/.env
           echo "VISUALMUSIC_APP_PORT=${{ secrets.VISUALMUSIC_APP_PORT }}" >> ./visualmusic/backend/.env
-          echo "GITHUB_USERNAME=popipopka" >> ./visualmusic/backend/.env
-          echo "REPO_NAME=${{ env.REPO_NAME_LC }}" >> ./visualmusic/backend/.env
+          echo "ORG_NAME=${{ env.REPO_NAME_LC }}" >> ./visualmusic/backend/.env
           echo "SHORT_SHA=${SHORT_SHA_VALUE}" >> ./visualmusic/backend/.env
           EOF
 

@@ -15,7 +15,7 @@ services:
   visualmusic-app:
     depends_on:
       - auth-postgres
-    image: ghcr:io/${GITHUB_USERNAME}/${REPO_NAME}:${SHORT_SHA}
+    image: ghcr:io/${ORG_NAME}:${SHORT_SHA}
     container_name: visualmusic-app
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
