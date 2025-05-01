@@ -34,13 +34,16 @@ jobs:
       - name: Set short SHA to ENV
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
+      - name: Set lowercase repository name
+        run: echo "REPO_NAME_LC=$(echo '${{ github.repository.name }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.event.repository.name }}:${{ env.SHORT_SHA }}
+          tags: ghcr.io/${{ env.REPO_NAME_LC }}:${{ env.SHORT_SHA }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -67,6 +70,9 @@ jobs:
             docker-compose.yaml \
             ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:./visualmusic/backend/
 
+      - name: Set lowercase repository name
+        run: echo "REPO_NAME_LC=$(echo '${{ github.repository.name }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Create .env file
         run: |
           SHORT_SHA_VALUE="${{ env.SHORT_SHA }}"
@@ -80,7 +86,7 @@ jobs:
           echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./visualmusic/backend/.env
           echo "VISUALMUSIC_APP_PORT=${{ secrets.VISUALMUSIC_APP_PORT }}" >> ./visualmusic/backend/.env
           echo "GITHUB_USERNAME=popipopka" >> ./visualmusic/backend/.env
-          echo "REPO_NAME=${{ github.event.repository.name }}" >> ./visualmusic/backend/.env
+          echo "REPO_NAME=${{ env.REPO_NAME_LC }}" >> ./visualmusic/backend/.env
           echo "SHORT_SHA=${SHORT_SHA_VALUE}" >> ./visualmusic/backend/.env
           EOF
 
@@ -90,7 +96,7 @@ jobs:
             echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u popipopka --password-stdin
           
             cd visualmusic/backend/
-            
+          
             docker-compose down
             docker-compose up -d
           EOF
