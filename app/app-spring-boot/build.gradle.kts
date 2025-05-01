@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     id("org.springframework.boot")
 }
@@ -14,4 +16,22 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.liquibase:liquibase-core")
+}
+
+tasks {
+    named<BootJar>("bootJar") {
+        layered {
+            enabled = true
+        }
+        archiveFileName.set("visualmusic.jar")
+        mainClass.set("app.visualmusic.app.spring.boot.VisualMusicApplication")
+    }
+
+    named<Jar>("jar") {
+        enabled = false
+    }
+
+    named("build") {
+        dependsOn("bootJar")
+    }
 }
