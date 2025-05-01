@@ -32,6 +32,12 @@ subprojects {
             }
 
             dependency("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+
+            dependencySet("io.jsonwebtoken:0.12.6") {
+                entry("jjwt-api")
+                entry("jjwt-impl")
+                entry("jjwt-jackson")
+            }
         }
 
     }

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-fill-roles-table__fill-in-data
+      author: popipopka
+      changes:
+        - loadData:
+            tableName: roles
+            file: roles.csv
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  type: varchar(32)
+                  name: name
+
+      rollback:
+        - sql:
+            sql: delete from roles where name in ('ROLE_USER', 'ROLE_ADMIN');
