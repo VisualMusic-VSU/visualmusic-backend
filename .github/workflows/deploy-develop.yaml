@@ -43,7 +43,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ end.REPO_NAME_LC }}:${{ env.SHORT_SHA }}
+          tags: ghcr.io/${{ env.REPO_NAME_LC }}:${{ env.SHORT_SHA }}
 
   deploy:
     runs-on: ubuntu-latest
