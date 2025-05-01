@@ -1,0 +1,29 @@
+services:
+  auth-postgres:
+    image: postgres:17
+    container_name: auth-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${AUTH_POSTGRES_DB}
+    volumes:
+      - ./docker/data/postgres/auth:/var/lib/postgresql/data
+    command: [ "postgres", "-c", "port=${AUTH_POSTGRES_PORT}" ]
+    ports:
+      - "${AUTH_POSTGRES_PORT}:${AUTH_POSTGRES_PORT}"
+
+  visualmusic-app:
+    depends_on:
+      - auth-postgres
+    image: ghcr:io/${GITHUB_USERNAME}/${REPO_NAME}:${SHORT_SHA}
+    container_name: visualmusic-app
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+
+      AUTH_POSTGRES_URL: ${AUTH_POSTGRES_URL}
+    ports:
+      - "${VISUALMUSIC_APP_PORT}:8080"
