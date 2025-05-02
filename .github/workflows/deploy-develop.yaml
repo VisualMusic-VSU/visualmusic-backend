@@ -75,7 +75,6 @@ jobs:
 
       - name: Create .env file
         run: |
-          SHORT_SHA_VALUE="${{ env.SHORT_SHA }}"
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
           echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" > ./visualmusic/backend/.env
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> ./visualmusic/backend/.env
@@ -86,7 +85,7 @@ jobs:
           echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./visualmusic/backend/.env
           echo "VISUALMUSIC_APP_PORT=${{ secrets.VISUALMUSIC_APP_PORT }}" >> ./visualmusic/backend/.env
           echo "ORG_NAME=${{ env.REPO_NAME_LC }}" >> ./visualmusic/backend/.env
-          echo "SHORT_SHA=${SHORT_SHA_VALUE}" >> ./visualmusic/backend/.env
+          echo "SHORT_SHA=${{ env.SHORT_SHA }}" >> ./visualmusic/backend/.env
           EOF
 
       - name: Deploy to server
