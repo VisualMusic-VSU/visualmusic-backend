@@ -20,6 +20,13 @@ includeProjects("auth", *authProjects)
 includeProjects("app", "app-spring-boot")
 
 
+// Cover Service
+val coverProjects = arrayOf(
+    "cover-domain"
+)
+includeProjects("cover", *coverProjects)
+
+
 
 // Utils
 fun includeProjects(rootDir: String, vararg projectPaths: String) {
