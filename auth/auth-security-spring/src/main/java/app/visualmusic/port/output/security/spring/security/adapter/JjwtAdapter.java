@@ -42,7 +42,7 @@ public class JjwtAdapter implements JwtTokenProvider {
         return Jwts
                 .builder()
                 .signWith(accessSecret)
-                .subject(user.getUsername())
+                .subject(user.getId().toString())
                 .claim("role", user.getRole().getName())
                 .issuedAt(Date.from(Instant.now()))
                 .expiration(parseExpiration(jwtProperties.getAccessTokenExpiration()))
@@ -55,7 +55,6 @@ public class JjwtAdapter implements JwtTokenProvider {
         String jwtsToken = Jwts
                 .builder()
                 .signWith(refreshSecret)
-                .subject(user.getUsername())
                 .issuedAt(Date.from(iat))
                 .expiration(parseExpiration(jwtProperties.getRefreshTokenExpiration()))
                 .compact();
@@ -100,12 +99,13 @@ public class JjwtAdapter implements JwtTokenProvider {
     }
 
     @Override
-    public String getUserEmail(String token, boolean isAccessToken) {
+    public Long getUserId(String token, boolean isAccessToken) {
         SecretKey secret = isAccessToken
                 ? accessSecret
                 : refreshSecret;
 
-        return extractClaims(token, secret, Claims::getSubject);
+        String sub = extractClaims(token, secret, Claims::getSubject);
+        return Long.valueOf(sub);
     }
 
     @Override

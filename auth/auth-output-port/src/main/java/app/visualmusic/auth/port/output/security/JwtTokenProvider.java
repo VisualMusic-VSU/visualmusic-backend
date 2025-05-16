@@ -12,7 +12,7 @@ public interface JwtTokenProvider {
 
     boolean isRefreshTokenValid(String token);
 
-    String getUserEmail(String token, boolean isAccessToken);
+    Long getUserId(String token, boolean isAccessToken);
 
     String getRole(String accessToken);
 }

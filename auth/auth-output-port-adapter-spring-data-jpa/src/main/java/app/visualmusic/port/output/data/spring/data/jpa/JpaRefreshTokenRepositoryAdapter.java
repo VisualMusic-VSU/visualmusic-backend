@@ -17,8 +17,8 @@ public class JpaRefreshTokenRepositoryAdapter implements RefreshTokenOutputPort 
     private final JpaRefreshTokenMapper mapper;
 
     @Override
-    public Optional<RefreshToken> findToken(String userEmail, String deviceId) {
-        return jpaRepository.findByUserEmailAndDeviceId(userEmail, deviceId)
+    public Optional<RefreshToken> find(Long userId, String deviceId) {
+        return jpaRepository.findByUserIdAndDeviceId(userId, deviceId)
                 .map(mapper::toDomain);
     }
 

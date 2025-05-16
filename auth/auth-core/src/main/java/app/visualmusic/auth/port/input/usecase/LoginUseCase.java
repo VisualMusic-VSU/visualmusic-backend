@@ -26,7 +26,7 @@ public class LoginUseCase implements LoginInputPort {
     public TokensResponse invoke(LoginRequest request) {
         String email = request.getEmail();
 
-        User user = userOutputPort.find(email)
+        User user = userOutputPort.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException(email));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
@@ -45,10 +45,10 @@ public class LoginUseCase implements LoginInputPort {
     }
 
     private void updateSavedRefreshToken(RefreshToken newRefreshToken) {
-        String userEmail = newRefreshToken.getUser().getEmail();
+        Long userId = newRefreshToken.getUser().getId();
         String deviceId = newRefreshToken.getDeviceId();
 
-        Optional<RefreshToken> savedRefreshToken = refreshTokenOutputPort.findToken(userEmail, deviceId);
+        Optional<RefreshToken> savedRefreshToken = refreshTokenOutputPort.find(userId, deviceId);
 
         savedRefreshToken.ifPresent(saved -> newRefreshToken.setId(saved.getId()));
 
