@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-fill-moods-table__fill-in-data
+      author: popipopka
+      changes:
+        - loadData:
+            tableName: moods
+            file: data/moods.csv
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  type: varchar(32)
+                  name: name
+
+      rollback:
+        - sql:
+            sql: >
+              delete from moods where name in (
+                'Весёлое',
+                'Нейтральное',
+                'Грустное',
+                'Яростное',
+                'Интроспективное',
+                'Напористое',
+                'Брутальное',
+                'Энергичное',
+                'Успокаивающее',
+                'Беззаботное',
+                'Уверенное',
+                'Танцевальное',
+                'Замысловатое',
+                'Величественное'
+              );

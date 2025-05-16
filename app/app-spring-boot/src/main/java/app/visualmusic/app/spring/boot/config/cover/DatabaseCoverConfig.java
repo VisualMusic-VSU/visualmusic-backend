@@ -1,4 +1,4 @@
-package app.visualmusic.app.spring.boot.config.auth;
+package app.visualmusic.app.spring.boot.config.cover;
 
 import app.visualmusic.app.spring.boot.config.property.DatabaseProperty;
 import app.visualmusic.app.spring.boot.config.property.LiquibaseProperty;
@@ -20,29 +20,29 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 
 @EnableJpaRepositories(
-        entityManagerFactoryRef = DatabaseAuthConfig.ENTITY_MANAGER_FACTORY,
-        transactionManagerRef = DatabaseAuthConfig.TRANSACTION_MANAGER,
-        basePackages = DatabaseAuthConfig.JPA_REPOSITORY_PACKAGE
+        entityManagerFactoryRef = DatabaseCoverConfig.ENTITY_MANAGER_FACTORY,
+        transactionManagerRef = DatabaseCoverConfig.TRANSACTION_MANAGER,
+        basePackages = DatabaseCoverConfig.JPA_REPOSITORY_PACKAGE
 )
 @EntityScan(
-        basePackages = DatabaseAuthConfig.ENTITY_PACKAGE
+        basePackages = DatabaseCoverConfig.ENTITY_PACKAGE
 )
 @Configuration
 @EnableTransactionManagement
-public class DatabaseAuthConfig {
-    public static final String AUTH_DB_PACKAGE = "app.visualmusic.auth.persistence.postgre.spring.data.jpa";
-    public static final String JPA_REPOSITORY_PACKAGE = AUTH_DB_PACKAGE + ".repository";
-    public static final String ENTITY_PACKAGE = AUTH_DB_PACKAGE + ".entity";
+public class DatabaseCoverConfig {
+    public static final String COVER_DB_PACKAGE = "app.visualmusic.cover.persistence.postgre.spring.data.jpa";
+    public static final String JPA_REPOSITORY_PACKAGE = COVER_DB_PACKAGE + ".repository";
+    public static final String ENTITY_PACKAGE = COVER_DB_PACKAGE + ".entity";
 
-    public static final String DATASOURCE_PROPERTY_PREFIX = "app.auth.datasource";
-    public static final String TRANSACTION_MANAGER = "authTransactionManager";
-    public static final String ENTITY_MANAGER_FACTORY = "authEntityManagerFactory";
-    public static final String DATA_SOURCE = "authDataSource";
-    public static final String DATABASE_PROPERTY = "authDatabaseProperty";
+    public static final String DATASOURCE_PROPERTY_PREFIX = "app.cover.datasource";
+    public static final String TRANSACTION_MANAGER = "coverTransactionManager";
+    public static final String ENTITY_MANAGER_FACTORY = "coverEntityManagerFactory";
+    public static final String DATA_SOURCE = "coverDataSource";
+    public static final String DATABASE_PROPERTY = "coverDatabaseProperty";
 
-    public static final String LIQUIBASE_BEAN_NAME = "authLiquibase";
-    public static final String LIQUIBASE_PROPERTY_PREFIX = "app.auth.liquibase";
-    public static final String LIQUIBASE_PROPERTY = "authLiquibaseProperty";
+    public static final String LIQUIBASE_BEAN_NAME = "coverLiquibase";
+    public static final String LIQUIBASE_PROPERTY_PREFIX = "app.cover.liquibase";
+    public static final String LIQUIBASE_PROPERTY = "coverLiquibaseProperty";
 
     @Bean(DATABASE_PROPERTY)
     @ConfigurationProperties(prefix = DATASOURCE_PROPERTY_PREFIX)
@@ -68,6 +68,7 @@ public class DatabaseAuthConfig {
             @Qualifier(DATA_SOURCE) DataSource dataSource
     ) {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+
         em.setDataSource(dataSource);
         em.setPersistenceUnitName(ENTITY_MANAGER_FACTORY);
         em.setPackagesToScan(ENTITY_PACKAGE);
@@ -102,14 +103,14 @@ public class DatabaseAuthConfig {
     }
 
     @Bean(name = LIQUIBASE_BEAN_NAME)
-    public SpringLiquibase authLiquibase(
+    public SpringLiquibase coverLiquibase(
             @Qualifier(DATA_SOURCE) DataSource dataSource,
             @Qualifier(LIQUIBASE_PROPERTY) LiquibaseProperty liquibaseProperty
     ) {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
         liquibase.setChangeLog(liquibaseProperty.getChangeLog());
-        liquibase.setContexts("auth");
+        liquibase.setContexts("cover");
         return liquibase;
     }
 }

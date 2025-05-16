@@ -22,7 +22,8 @@ includeProjects("app", "app-spring-boot")
 
 // Cover Service
 val coverProjects = arrayOf(
-    "cover-domain"
+    "cover-domain",
+    "cover-postgre-spring-data-jpa"
 )
 includeProjects("cover", *coverProjects)
 

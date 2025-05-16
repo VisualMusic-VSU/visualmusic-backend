@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    // Auth Service
     implementation(project(":auth-input-port"))
     implementation(project(":auth-core"))
     implementation(project(":auth-core-proxy-spring-transactional"))
@@ -13,6 +14,9 @@ dependencies {
     implementation(project(":auth-output-port-adapter-spring-data-jpa"))
     implementation(project(":auth-postgre-spring-data-jpa"))
     implementation(project(":auth-security-spring"))
+
+    // Cover Service
+    implementation(project(":cover-postgre-spring-data-jpa"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.liquibase:liquibase-core")

@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06-create-covers-table__create-table
+      author: popipopka
+      changes:
+        - createTable:
+            tableName: covers
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cover_group_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image_url
+                  type: text
+                  constraints:
+                    unique: true
+      rollback:
+        - dropTable:
+            tableName: covers
+
+  - changeSet:
+      id: 06-create-covers-table__add-fk
+      author: popipopka
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: covers
+            baseColumnNames: cover_group_id
+            referencedTableName: cover_groups
+            referencedColumnNames: id
+            constraintName: fk_covers_cover_groups
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: covers
+            constraintName: fk_covers_cover_groups
