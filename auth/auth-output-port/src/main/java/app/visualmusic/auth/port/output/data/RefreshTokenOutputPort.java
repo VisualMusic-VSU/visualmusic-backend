@@ -5,7 +5,7 @@ import app.visualmusic.auth.domain.RefreshToken;
 import java.util.Optional;
 
 public interface RefreshTokenOutputPort {
-    Optional<RefreshToken> findToken(String userEmail, String deviceId);
+    Optional<RefreshToken> find(Long userId, String deviceId);
 
     void save(RefreshToken refreshToken);
 

@@ -22,7 +22,13 @@ public class JpaUserRepositoryAdapter implements UserOutputPort {
     }
 
     @Override
-    public Optional<User> find(String email) {
+    public Optional<User> findById(Long id) {
+        return jpaRepository.findById(id)
+                .map(mapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
         return jpaRepository.findByEmail(email)
                 .map(mapper::toDomain);
     }

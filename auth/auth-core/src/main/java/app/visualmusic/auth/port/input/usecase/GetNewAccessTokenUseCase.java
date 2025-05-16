@@ -27,18 +27,18 @@ public class GetNewAccessTokenUseCase implements GetNewAccessTokenInputPort {
             throw AuthenticationException.invalidRefreshToken();
         }
 
-        String email = jwtTokenProvider.getUserEmail(refreshToken, false);
+        Long userId = jwtTokenProvider.getUserId(refreshToken, false);
         String deviceId = request.getDeviceId();
 
-        RefreshToken savedRefreshToken = refreshTokenOutputPort.findToken(email, deviceId)
+        RefreshToken savedRefreshToken = refreshTokenOutputPort.find(userId, deviceId)
                 .orElseThrow(AuthenticationException::revokedRefreshToken);
 
         if (!savedRefreshToken.getToken().equals(refreshToken)) {
             throw AuthenticationException.revokedRefreshToken();
         }
 
-        User user = userOutputPort.find(email)
-                .orElseThrow(() -> new UserNotFoundException(email));
+        User user = userOutputPort.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         String newAccessToken = jwtTokenProvider.generateAccessToken(user);
 
