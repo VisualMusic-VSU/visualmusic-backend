@@ -12,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static app.visualmusic.auth.port.input.spring.web.common.AuthEndpointConstants.AUTH_BASE_PATH;
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -25,13 +23,14 @@ public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = new String[]{
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            AUTH_BASE_PATH + "/**"
+            "/api/v1/auth/**"
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated()

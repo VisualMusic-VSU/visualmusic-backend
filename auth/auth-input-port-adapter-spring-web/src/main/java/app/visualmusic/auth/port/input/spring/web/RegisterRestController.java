@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static app.visualmusic.auth.port.input.spring.web.common.AuthEndpointConstants.PRODUCES;
-import static app.visualmusic.auth.port.input.spring.web.common.AuthEndpointConstants.REGISTER_PATH;
-
 @RestController
 @RequiredArgsConstructor
 public class RegisterRestController {
     private final RegisterInputPort registerInputPort;
 
-    @PostMapping(value = REGISTER_PATH, produces = PRODUCES)
+    @PostMapping(value = "/api/v1/auth/register", produces = "application/json")
     public ResponseEntity<Void> register(@RequestBody RegisterRequest request) {
         registerInputPort.invoke(request);
 
