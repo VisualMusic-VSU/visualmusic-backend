@@ -1,4 +1,4 @@
-package app.visualmusic.port.output.security.spring.security.property;
+package app.visualmusic.security.spring.security.property;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

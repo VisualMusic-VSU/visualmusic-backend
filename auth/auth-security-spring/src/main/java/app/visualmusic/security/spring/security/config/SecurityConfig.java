@@ -1,4 +1,4 @@
-package app.visualmusic.port.output.security.spring.security.config;
+package app.visualmusic.security.spring.security.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +20,16 @@ public class SecurityConfig {
     private final AccessDeniedHandlerImpl accessDeniedHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    private static final String[] AUTH_WHITELIST = new String[]{
+    private static final String[] PUBLIC = {
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/api/v1/auth/**"
+            "/api/v1/auth/**",
+            "/api/v1/groups/public/**"
+    };
+
+    private static final String[] USER_PRIVATE = {
+            "/api/v1/groups/generated/**",
+            "/api/v1/groups/saved/**",
     };
 
     @Bean
@@ -32,8 +38,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(USER_PRIVATE).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(PUBLIC).permitAll()
+                        .anyRequest().hasRole("ADMIN")
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

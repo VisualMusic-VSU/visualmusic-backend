@@ -1,4 +1,4 @@
-package app.visualmusic.port.output.security.spring.security.adapter;
+package app.visualmusic.security.spring.security.adapter;
 
 import app.visualmusic.auth.port.output.security.PasswordEncoder;
 import lombok.RequiredArgsConstructor;

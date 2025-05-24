@@ -1,4 +1,4 @@
-package app.visualmusic.port.output.security.spring.security.config;
+package app.visualmusic.security.spring.security.config;
 
 import app.visualmusic.auth.port.output.security.JwtTokenProvider;
 import jakarta.servlet.FilterChain;

@@ -1,9 +1,9 @@
-package app.visualmusic.port.output.security.spring.security.adapter;
+package app.visualmusic.security.spring.security.adapter;
 
 import app.visualmusic.auth.domain.RefreshToken;
 import app.visualmusic.auth.domain.User;
 import app.visualmusic.auth.port.output.security.JwtTokenProvider;
-import app.visualmusic.port.output.security.spring.security.property.JwtProperties;
+import app.visualmusic.security.spring.security.property.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

@@ -4,7 +4,9 @@ plugins {
 dependencies {
     implementation(project(":auth-domain"))
     implementation(project(":auth-output-port"))
+
     implementation(project(":auth-input-port-adapter-spring-web"))
+    implementation(project(":cover-input-port-adapter-spring-web"))
 
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("jakarta.servlet:jakarta.servlet-api")
