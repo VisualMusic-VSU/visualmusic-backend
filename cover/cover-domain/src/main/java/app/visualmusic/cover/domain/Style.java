@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Style {
+public class Style implements ReferenceItem {
     @EqualsAndHashCode.Include
     Long id;
 

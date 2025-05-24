@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Mood {
+public class Mood implements ReferenceItem {
     @EqualsAndHashCode.Include
     Long id;
 

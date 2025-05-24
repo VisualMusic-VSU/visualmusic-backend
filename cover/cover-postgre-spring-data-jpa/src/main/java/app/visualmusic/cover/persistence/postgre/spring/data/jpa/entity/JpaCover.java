@@ -21,7 +21,7 @@ public class JpaCover {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cover_group_id", nullable = false)
-    private JpaCoverGroup coverGroup;
+    private JpaGroup group;
 
     @Column(name = "image_url", columnDefinition = "TEXT", unique = true)
     private String imageUrl;

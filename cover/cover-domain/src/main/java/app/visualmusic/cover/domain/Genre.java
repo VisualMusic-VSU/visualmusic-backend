@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Genre {
+public class Genre implements ReferenceItem {
     @EqualsAndHashCode.Include
     Long id;
 

@@ -10,7 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CoverGroup {
+public class Group {
     @EqualsAndHashCode.Include
     private Long id;
 

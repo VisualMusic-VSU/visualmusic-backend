@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "saved_cover_groups")
-public class JpaSavedCoverGroup {
+public class JpaSavedGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +24,5 @@ public class JpaSavedCoverGroup {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cover_group_id", nullable = false)
-    private JpaCoverGroup coverGroup;
+    private JpaGroup group;
 }

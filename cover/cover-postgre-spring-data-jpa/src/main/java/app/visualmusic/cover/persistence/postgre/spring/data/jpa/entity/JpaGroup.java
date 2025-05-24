@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
@@ -16,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "cover_groups")
-public class JpaCoverGroup {
+public class JpaGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,11 +51,19 @@ public class JpaCoverGroup {
     @Column(name = "prompt")
     private String prompt;
 
+    @BatchSize(size = 10)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "cover_groups_genres",
             joinColumns = @JoinColumn(name = "cover_group_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
-    private Set<JpaGenre> genres = new HashSet<>();
+    private Set<JpaGenre> genres = new LinkedHashSet<>();
+
+    @BatchSize(size = 10)
+    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<JpaCover> covers = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<JpaSavedGroup> saves = new HashSet<>();
 }
