@@ -78,12 +78,20 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
           echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" > ./visualmusic/backend/develop/.env
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> ./visualmusic/backend/develop/.env
+          
           echo "AUTH_POSTGRES_DB=${{ secrets.AUTH_POSTGRES_DB }}" >> ./visualmusic/backend/develop/.env
           echo "AUTH_POSTGRES_PORT=${{ secrets.AUTH_POSTGRES_PORT }}" >> ./visualmusic/backend/develop/.env
           echo "AUTH_POSTGRES_URL=${{ secrets.AUTH_POSTGRES_URL }}" >> ./visualmusic/backend/develop/.env
+          
+          echo "COVER_POSTGRES_DB=${{ secrets.COVER_POSTGRES_DB }}" >> ./visualmusic/backend/develop/.env
+          echo "COVER_POSTGRES_PORT=${{ secrets.COVER_POSTGRES_PORT }}" >> ./visualmusic/backend/develop/.env
+          echo "COVER_POSTGRES_URL=${{ secrets.COVER_POSTGRES_URL }}" >> ./visualmusic/backend/develop/.env
+          
           echo "JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./visualmusic/backend/develop/.env
           echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./visualmusic/backend/develop/.env
+          
           echo "VISUALMUSIC_APP_PORT=${{ secrets.DEPLOY_VISUALMUSIC_APP_PORT }}" >> ./visualmusic/backend/develop/.env
+          
           echo "ORG_NAME=${{ env.REPO_NAME_LC }}" >> ./visualmusic/backend/develop/.env
           echo "SHORT_SHA=${{ env.SHORT_SHA }}" >> ./visualmusic/backend/develop/.env
           EOF
@@ -95,6 +103,6 @@ jobs:
           
             cd visualmusic/backend/develop
           
-            docker-compose down
-            docker-compose up -d
+            docker compose down
+            docker compose up -d
           EOF
