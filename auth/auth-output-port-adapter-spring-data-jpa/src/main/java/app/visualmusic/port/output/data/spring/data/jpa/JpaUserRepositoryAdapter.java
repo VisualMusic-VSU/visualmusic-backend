@@ -37,4 +37,9 @@ public class JpaUserRepositoryAdapter implements UserOutputPort {
     public boolean exists(String email) {
         return jpaRepository.existsByEmail(email);
     }
+
+    @Override
+    public boolean exists(long id) {
+        return jpaRepository.existsById(id);
+    }
 }

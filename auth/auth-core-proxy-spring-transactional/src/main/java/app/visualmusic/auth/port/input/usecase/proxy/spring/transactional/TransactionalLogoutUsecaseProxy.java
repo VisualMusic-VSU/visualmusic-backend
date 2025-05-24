@@ -10,7 +10,7 @@ public class TransactionalLogoutUsecaseProxy implements LogoutInputPort {
     private final LogoutInputPort delegate;
 
     @Override
-    @Transactional
+    @Transactional(transactionManager = "authTransactionManager")
     public void invoke(LogoutRequest request) {
         delegate.invoke(request);
     }
