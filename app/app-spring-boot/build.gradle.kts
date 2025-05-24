@@ -7,18 +7,26 @@ plugins {
 dependencies {
     // Auth Service
     implementation(project(":auth-input-port"))
+    implementation(project(":auth-input-port-adapter-spring-web"))
     implementation(project(":auth-core"))
     implementation(project(":auth-core-proxy-spring-transactional"))
-    implementation(project(":auth-input-port-adapter-spring-web"))
     implementation(project(":auth-output-port"))
     implementation(project(":auth-output-port-adapter-spring-data-jpa"))
     implementation(project(":auth-postgre-spring-data-jpa"))
     implementation(project(":auth-security-spring"))
 
     // Cover Service
+    implementation(project(":cover-input-port"))
+    implementation(project(":cover-input-port-adapter-spring-web"))
+    implementation(project(":cover-core"))
+    implementation(project(":cover-core-proxy-spring-transactional"))
+    implementation(project(":cover-output-port"))
+    implementation(project(":cover-output-port-adapter-spring-data-jpa"))
+    implementation(project(":cover-output-port-adapter-direct"))
     implementation(project(":cover-postgre-spring-data-jpa"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.liquibase:liquibase-core")
 }
 

@@ -16,16 +16,24 @@ val authProjects = arrayOf(
 includeProjects("auth", *authProjects)
 
 
-// App
-includeProjects("app", "app-spring-boot")
-
-
 // Cover Service
 val coverProjects = arrayOf(
     "cover-domain",
-    "cover-postgre-spring-data-jpa"
+    "cover-shared",
+    "cover-input-port",
+    "cover-core",
+    "cover-core-proxy-spring-transactional",
+    "cover-input-port-adapter-spring-web",
+    "cover-output-port",
+    "cover-output-port-adapter-spring-data-jpa",
+    "cover-postgre-spring-data-jpa",
+    "cover-output-port-adapter-direct"
 )
 includeProjects("cover", *coverProjects)
+
+
+// App
+includeProjects("app", "app-spring-boot")
 
 
 

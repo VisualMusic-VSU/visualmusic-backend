@@ -1,6 +1,6 @@
 package app.visualmusic.app.spring.boot;
 
-import app.visualmusic.port.output.security.spring.security.property.JwtProperties;
+import app.visualmusic.security.spring.security.property.JwtProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
