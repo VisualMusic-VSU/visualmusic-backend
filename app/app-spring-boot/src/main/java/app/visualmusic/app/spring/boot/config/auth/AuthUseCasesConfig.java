@@ -1,13 +1,7 @@
 package app.visualmusic.app.spring.boot.config.auth;
 
-import app.visualmusic.auth.port.input.GetNewAccessTokenInputPort;
-import app.visualmusic.auth.port.input.LoginInputPort;
-import app.visualmusic.auth.port.input.LogoutInputPort;
-import app.visualmusic.auth.port.input.RegisterInputPort;
-import app.visualmusic.auth.port.input.usecase.GetNewAccessTokenUseCase;
-import app.visualmusic.auth.port.input.usecase.LoginUseCase;
-import app.visualmusic.auth.port.input.usecase.LogoutUseCase;
-import app.visualmusic.auth.port.input.usecase.RegisterUseCase;
+import app.visualmusic.auth.port.input.*;
+import app.visualmusic.auth.port.input.usecase.*;
 import app.visualmusic.auth.port.input.usecase.mapper.UserMapper;
 import app.visualmusic.auth.port.input.usecase.proxy.spring.transactional.TransactionalLogoutUsecaseProxy;
 import app.visualmusic.auth.port.output.data.RefreshTokenOutputPort;
@@ -59,5 +53,10 @@ public class AuthUseCasesConfig {
     @Bean
     public RegisterInputPort registerUseCase() {
         return new RegisterUseCase(userOutputPort, roleOutputPort, passwordEncoder, userMapper);
+    }
+
+    @Bean
+    public CheckUserExistsInputPort checkUserExistsUseCase() {
+        return new CheckUserExistsUseCase(userOutputPort);
     }
 }

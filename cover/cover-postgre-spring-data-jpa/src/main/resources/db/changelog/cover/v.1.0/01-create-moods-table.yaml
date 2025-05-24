@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-moods-table__create-table
+      author: popipopka
+      changes:
+        - createTable:
+            tableName: moods
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                    unique: true
+      rollback:
+        - dropTable:
+            tableName: moods

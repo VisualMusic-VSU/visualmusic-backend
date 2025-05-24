@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 07-create-saved_cover_groups-table__create-table
+      author: popipopka
+      changes:
+        - createTable:
+            tableName: saved_cover_groups
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cover_group_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: saved_cover_groups
+
+  - changeSet:
+      id: 07-create-saved_cover_groups-table__add-fk
+      author: popipopka
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: saved_cover_groups
+            baseColumnNames: cover_group_id
+            referencedTableName: cover_groups
+            referencedColumnNames: id
+            constraintName: fk_saved_cover_groups_cover_groups
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: saved_cover_groups
+            constraintName: fk_saved_cover_groups_cover_groups

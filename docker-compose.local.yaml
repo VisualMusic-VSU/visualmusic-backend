@@ -1,0 +1,40 @@
+services:
+  auth-postgres:
+    image: postgres:17
+    container_name: auth-postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: auth
+    volumes:
+      - ./docker/data/postgres/auth:/var/lib/postgresql/data
+    ports:
+      - "5440:5432"
+
+  cover-postgres:
+    image: postgres:17
+    container_name: cover-postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: cover
+    volumes:
+      - ./docker/data/postgres/cover:/var/lib/postgresql/data
+    ports:
+      - "5441:5432"
+
+  visualmusic-app:
+    depends_on:
+      - auth-postgres
+      - cover-postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: /app/build/libs/visualmusic.jar
+    container_name: visualmusic-app
+    environment:
+      AUTH_POSTGRES_URL: jdbc:postgresql://auth-postgres:5440/auth
+      COVER_POSTGRES_URL: jdbc:postgresql://cover-postgres:5441/auth
+    ports:
+      - "8080:8080"

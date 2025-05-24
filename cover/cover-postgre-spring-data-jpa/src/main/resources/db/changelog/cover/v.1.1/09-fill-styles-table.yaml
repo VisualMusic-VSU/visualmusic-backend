@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-fill-styles-table__fill-in-data
+      author: popipopka
+      changes:
+        - loadData:
+            tableName: styles
+            file: data/styles.csv
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  type: varchar(32)
+                  name: name
+
+      rollback:
+        - sql:
+            sql: >
+              delete from styles where name in (
+                'Детальное фото',
+                'Малевич',
+                'Студийное фото',
+                'Киберпанк',
+                'Айвазовский',
+                'Картина маслом',
+                '3D рендер',
+                'Портретное фото',
+                'Цифровая живопись',
+                'Мультфильм',
+                'Рисунок карандашом',
+                'Классицизм',
+                'Хохлома',
+                'Пикассо',
+                'Пиксель арт',
+                'Кандинский',
+                'Аниме'
+              );

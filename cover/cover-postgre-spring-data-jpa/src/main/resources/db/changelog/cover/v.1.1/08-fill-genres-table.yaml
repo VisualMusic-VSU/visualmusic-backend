@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-fill-genres-table__fill-in-data
+      author: popipopka
+      changes:
+        - loadData:
+            tableName: genres
+            file: data/genres.csv
+            relativeToChangelogFile: true
+            columns:
+              - column:
+                  type: varchar(32)
+                  name: name
+
+      rollback:
+        - sql:
+            sql: >
+              delete from genres where name in (
+                'Рэп',
+                'Трэп',
+                'Бум-бэп',
+                'Дрилл',
+                'Хард-рок',
+                'Альтернативный рок',
+                'Метал',
+                'Хаус',
+                'Техно',
+                'Драм-н-бейс',
+                'Смуз-джаз',
+                'Бибоп',
+                'Фьюжн',
+                'Симфония',
+                'Оркестровая музыка',
+                'Камерная музыка'
+              );

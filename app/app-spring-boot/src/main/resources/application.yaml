@@ -16,6 +16,16 @@ app:
     liquibase:
       change-log: classpath:/db/changelog/auth/main-changelog.yaml
 
+  cover:
+    datasource:
+      url: ${COVER_POSTGRES_URL}
+      username: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+      class-driver: org.postgresql.Driver
+
+    liquibase:
+      change-log: classpath:/db/changelog/cover/main-changelog.yaml
+
   jwt:
     access-secret: ${JWT_ACCESS_SECRET}
     access-token-expiration: PT5M

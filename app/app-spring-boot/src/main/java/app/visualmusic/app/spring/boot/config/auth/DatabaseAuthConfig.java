@@ -19,8 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.HashMap;
 
-import static app.visualmusic.app.spring.boot.config.auth.ModulesBasePackage.AUTH_DB_PACKAGE;
-
 @EnableJpaRepositories(
         entityManagerFactoryRef = DatabaseAuthConfig.ENTITY_MANAGER_FACTORY,
         transactionManagerRef = DatabaseAuthConfig.TRANSACTION_MANAGER,
@@ -32,6 +30,7 @@ import static app.visualmusic.app.spring.boot.config.auth.ModulesBasePackage.AUT
 @Configuration
 @EnableTransactionManagement
 public class DatabaseAuthConfig {
+    public static final String AUTH_DB_PACKAGE = "app.visualmusic.auth.persistence.postgre.spring.data.jpa";
     public static final String JPA_REPOSITORY_PACKAGE = AUTH_DB_PACKAGE + ".repository";
     public static final String ENTITY_PACKAGE = AUTH_DB_PACKAGE + ".entity";
 

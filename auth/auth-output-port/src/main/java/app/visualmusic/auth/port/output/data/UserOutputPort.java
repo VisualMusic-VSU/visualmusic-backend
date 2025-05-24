@@ -12,4 +12,6 @@ public interface UserOutputPort {
     Optional<User> findByEmail(String email);
 
     boolean exists(String email);
+
+    boolean exists(long id);
 }
