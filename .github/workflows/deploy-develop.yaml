@@ -83,7 +83,7 @@ jobs:
           echo "AUTH_POSTGRES_URL=${{ secrets.AUTH_POSTGRES_URL }}" >> ./visualmusic/backend/develop.env
           echo "JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./visualmusic/backend/develop.env
           echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./visualmusic/backend/develop.env
-          echo "VISUALMUSIC_APP_PORT=${{ secrets.VISUALMUSIC_APP_PORT }}" >> ./visualmusic/backend/develop.env
+          echo "VISUALMUSIC_APP_PORT=${{ secrets.DEPLOY_VISUALMUSIC_APP_PORT }}" >> ./visualmusic/backend/develop.env
           echo "ORG_NAME=${{ env.REPO_NAME_LC }}" >> ./visualmusic/backend/develop.env
           echo "SHORT_SHA=${{ env.SHORT_SHA }}" >> ./visualmusic/backend/develop.env
           EOF
