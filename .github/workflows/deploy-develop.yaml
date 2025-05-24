@@ -93,7 +93,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }} << 'EOF'
             echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u popipopka --password-stdin
           
-            cd visualmusic/backend/
+            cd visualmusic/backend/develop
           
             docker-compose down
             docker-compose up -d
