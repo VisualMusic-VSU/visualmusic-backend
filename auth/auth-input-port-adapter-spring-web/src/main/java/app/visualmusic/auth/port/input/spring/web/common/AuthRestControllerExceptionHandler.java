@@ -4,11 +4,31 @@ import app.visualmusic.auth.port.input.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.List;
+
 @RestControllerAdvice
 public class AuthRestControllerExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ProblemDetail> handle(MethodArgumentNotValidException ex) {
+        List<FieldConstraintViolation> violations = ex.getFieldErrors()
+                .stream()
+                .map(e ->
+                        FieldConstraintViolation.of(e.getField(), e.getDefaultMessage())
+                )
+                .toList();
+
+        ProblemDetail problemDetail = ProblemDetail.forStatus(ex.getStatusCode());
+        problemDetail.setProperty("violations", violations);
+
+        return ResponseEntity
+                .of(problemDetail)
+                .build();
+    }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<ProblemDetail> handleUserAlreadyExistException(UserAlreadyExistsException ex) {

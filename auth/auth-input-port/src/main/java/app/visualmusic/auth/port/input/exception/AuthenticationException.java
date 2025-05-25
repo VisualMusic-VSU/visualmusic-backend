@@ -13,4 +13,8 @@ public class AuthenticationException extends RuntimeException {
     public static AuthenticationException revokedRefreshToken() {
         return new AuthenticationException("Refresh token has been revoked");
     }
+
+    public static AuthenticationException userNotFound() {
+        return new AuthenticationException("User not found");
+    }
 }

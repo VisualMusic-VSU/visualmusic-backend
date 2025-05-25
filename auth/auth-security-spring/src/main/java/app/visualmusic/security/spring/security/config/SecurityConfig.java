@@ -22,7 +22,7 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC = {
             "/swagger-ui/**",
-            "/v3/api-docs/**",
+            "/api-docs/**",
             "/api/v1/auth/**",
             "/api/v1/groups/public/**"
     };
