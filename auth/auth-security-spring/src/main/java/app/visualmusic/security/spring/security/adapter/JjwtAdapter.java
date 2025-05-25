@@ -52,9 +52,11 @@ public class JjwtAdapter implements JwtTokenProvider {
     @Override
     public RefreshToken generateRefreshToken(User user, String deviceId) {
         Instant iat = Instant.now();
+
         String jwtsToken = Jwts
                 .builder()
                 .signWith(refreshSecret)
+                .subject(user.getId().toString())
                 .issuedAt(Date.from(iat))
                 .expiration(parseExpiration(jwtProperties.getRefreshTokenExpiration()))
                 .compact();
