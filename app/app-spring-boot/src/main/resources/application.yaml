@@ -31,3 +31,7 @@ app:
     access-token-expiration: PT5M
     refresh-secret: ${JWT_REFRESH_SECRET}
     refresh-token-expiration: P30D
+
+springdoc:
+  api-docs:
+    path: /api-docs

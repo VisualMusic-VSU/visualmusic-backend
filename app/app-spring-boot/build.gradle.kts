@@ -25,8 +25,11 @@ dependencies {
     implementation(project(":cover-output-port-adapter-direct"))
     implementation(project(":cover-postgre-spring-data-jpa"))
 
+    // Common
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
+
     implementation("org.liquibase:liquibase-core")
 }
 

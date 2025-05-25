@@ -4,7 +4,6 @@ import app.visualmusic.auth.domain.RefreshToken;
 import app.visualmusic.auth.domain.User;
 import app.visualmusic.auth.port.input.GetNewAccessTokenInputPort;
 import app.visualmusic.auth.port.input.exception.AuthenticationException;
-import app.visualmusic.auth.port.input.exception.UserNotFoundException;
 import app.visualmusic.auth.port.output.data.RefreshTokenOutputPort;
 import app.visualmusic.auth.port.output.data.UserOutputPort;
 import app.visualmusic.auth.port.output.security.JwtTokenProvider;
@@ -38,7 +37,7 @@ public class GetNewAccessTokenUseCase implements GetNewAccessTokenInputPort {
         }
 
         User user = userOutputPort.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+                .orElseThrow(AuthenticationException::userNotFound);
 
         String newAccessToken = jwtTokenProvider.generateAccessToken(user);
 
