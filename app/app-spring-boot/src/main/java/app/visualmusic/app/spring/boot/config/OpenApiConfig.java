@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 )
 @SecurityScheme(
         name = "JWT",
+        description = "Аутентификация через JWT токены",
         type = SecuritySchemeType.HTTP,
         bearerFormat = "JWT",
         scheme = "bearer"
