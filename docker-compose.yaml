@@ -25,6 +25,19 @@ services:
     ports:
       - "${COVER_POSTGRES_PORT}:${COVER_POSTGRES_PORT}"
 
+  minio:
+    image: minio/minio
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./docker/data/minio:/data
+    command: server /data --console-address ":9001"
+    ports:
+      - "${MINIO_S3_PORT}:9000"
+      - "${MINIO_CONSOLE_PORT}:9001"
+
   visualmusic-app:
     depends_on:
       - auth-postgres
