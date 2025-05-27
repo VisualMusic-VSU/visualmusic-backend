@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06_refresh_tokens_add_user_id_device_id_unique__add-user_id-device_id-unique
+      author: popipopka
+      changes:
+        - dropUniqueConstraint:
+            tableName: refresh_tokens
+            constraintName: refresh_tokens_device_id_key
+        - addUniqueConstraint:
+            tableName: refresh_tokens
+            columnNames: user_id, device_id
+            constraintName: uq_user_id_device_id
+
+      rollback:
+        - addUniqueConstraint:
+            tableName: refresh_tokens
+            columnNames: device_id
+            constraintName: refresh_tokens_device_id_key
+        - dropUniqueConstraint:
+            tableName: refresh_tokens
+            constraintName: uq_user_id_device_id
