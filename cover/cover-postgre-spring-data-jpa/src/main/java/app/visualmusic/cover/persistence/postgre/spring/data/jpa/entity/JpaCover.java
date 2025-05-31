@@ -23,6 +23,9 @@ public class JpaCover {
     @JoinColumn(name = "cover_group_id", nullable = false)
     private JpaGroup group;
 
-    @Column(name = "image_url", columnDefinition = "TEXT", unique = true)
-    private String imageUrl;
+    @Column(name = "bucket", length = 32, nullable = false)
+    private String bucket;
+
+    @Column(name = "object_name", length = 64, nullable = false, unique = true)
+    private String object;
 }

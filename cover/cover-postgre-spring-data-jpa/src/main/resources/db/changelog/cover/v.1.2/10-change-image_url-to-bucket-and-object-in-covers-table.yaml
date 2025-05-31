@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10-change-image_url-to-bucket-and-object-in-covers-table
+      author: popipopka
+      changes:
+        - dropColumn:
+            columnName: image_url
+            tableName: covers
+        - addColumn:
+            tableName: covers
+            columns:
+              - column:
+                  name: bucket
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: object_name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+      rollback:
+        - addColumn:
+            tableName: covers
+            columns:
+              - column:
+                  name: image_url
+                  type: text
+        - dropColumn:
+            columnName: bucket
+            tableName: covers
+        - dropColumn:
+            columnName: object_name
+            tableName: covers
