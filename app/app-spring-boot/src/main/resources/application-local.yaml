@@ -18,5 +18,5 @@ app:
 
   minio:
     endpoint: ${MINIO_ENDPOINT:http://localhost:9900}
-    access-key: ${MINIO_ACCESS_KEY:N0MToFOfgVPbo64ojF9p}
-    secret-key: ${MINIO_REFRESH_KEY:CfkMcqf8HBSnW23sxxMszdrKwz3KPWUPS7hyY1vA}
+    access-key: ${MINIO_ACCESS_KEY:N0MToFOfgVPbo64ojF9p} # Нужно изменить
+    secret-key: ${MINIO_SECRET_KEY:CfkMcqf8HBSnW23sxxMszdrKwz3KPWUPS7hyY1vA} # Нужно изменить
