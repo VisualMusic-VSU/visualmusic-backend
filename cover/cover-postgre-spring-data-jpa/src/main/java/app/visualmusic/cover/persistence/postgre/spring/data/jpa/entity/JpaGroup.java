@@ -62,6 +62,7 @@ public class JpaGroup {
 
     @BatchSize(size = 10)
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("id asc")
     private Set<JpaCover> covers = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
