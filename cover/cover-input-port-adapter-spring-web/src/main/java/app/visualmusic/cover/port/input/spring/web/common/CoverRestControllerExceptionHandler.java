@@ -15,6 +15,11 @@ import java.util.List;
 @RestControllerAdvice
 public class CoverRestControllerExceptionHandler {
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ProblemDetail> handle(RuntimeException ex) {
+        return buildResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+    }
+
     /*
      * Более менее корректная обработка
      * Лучше конкретизировать ошибки, но на данный момент допускаю такую реализация из-за
