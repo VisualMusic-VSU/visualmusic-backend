@@ -26,6 +26,8 @@ val coverProjects = arrayOf(
     "cover-input-port-adapter-spring-web",
     "cover-output-port",
     "cover-output-port-adapter-spring-data-jpa",
+    "cover-output-port-adapter-minio",
+    "cover-output-port-adapter-spring-cache",
     "cover-postgre-spring-data-jpa",
     "cover-output-port-adapter-direct"
 )

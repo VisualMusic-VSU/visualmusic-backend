@@ -22,6 +22,8 @@ dependencies {
     implementation(project(":cover-core-proxy-spring-transactional"))
     implementation(project(":cover-output-port"))
     implementation(project(":cover-output-port-adapter-spring-data-jpa"))
+    implementation(project(":cover-output-port-adapter-minio"))
+    implementation(project(":cover-output-port-adapter-spring-cache"))
     implementation(project(":cover-output-port-adapter-direct"))
     implementation(project(":cover-postgre-spring-data-jpa"))
 
@@ -29,8 +31,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
 
+    implementation("com.github.ben-manes.caffeine:caffeine")
     implementation("org.liquibase:liquibase-core")
+    implementation("io.minio:minio")
 }
 
 tasks {

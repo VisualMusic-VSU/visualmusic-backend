@@ -40,6 +40,8 @@ subprojects {
             }
 
             dependency("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
+
+            dependency("io.minio:minio:8.5.17")
         }
     }
 

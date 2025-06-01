@@ -42,6 +42,7 @@ services:
     depends_on:
       - auth-postgres
       - cover-postgres
+      - minio
     image: ghcr.io/${ORG_NAME}:${SHORT_SHA}
     container_name: visualmusic-app
     environment:

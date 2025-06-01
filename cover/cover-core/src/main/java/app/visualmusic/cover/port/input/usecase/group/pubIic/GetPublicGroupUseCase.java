@@ -18,6 +18,7 @@ public class GetPublicGroupUseCase implements GetPublicGroupInputPort {
     public GroupDetailResponse invoke(long groupId) {
         Group group = groupOutputPort.findPublicById(groupId)
                 .orElseThrow(() -> new GroupNotFoundException(groupId));
+
         return groupMapper.toDetail(group);
     }
 }
