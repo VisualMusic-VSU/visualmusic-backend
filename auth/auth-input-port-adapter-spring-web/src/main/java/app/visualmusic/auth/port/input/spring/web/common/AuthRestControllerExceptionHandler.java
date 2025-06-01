@@ -13,6 +13,11 @@ import java.util.List;
 @RestControllerAdvice
 public class AuthRestControllerExceptionHandler {
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ProblemDetail> handle(RuntimeException ex) {
+        return buildResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ProblemDetail> handle(MethodArgumentNotValidException ex) {
         List<FieldConstraintViolation> violations = ex.getFieldErrors()
