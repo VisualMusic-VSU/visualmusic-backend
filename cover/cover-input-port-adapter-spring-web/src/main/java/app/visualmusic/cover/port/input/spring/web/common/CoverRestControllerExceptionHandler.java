@@ -1,9 +1,6 @@
 package app.visualmusic.cover.port.input.spring.web.common;
 
-import app.visualmusic.cover.shared.exception.CoverNotFoundException;
-import app.visualmusic.cover.shared.exception.GroupNotFoundException;
-import app.visualmusic.cover.shared.exception.ReferenceItemNotFoundException;
-import app.visualmusic.cover.shared.exception.UserNotFoundException;
+import app.visualmusic.cover.shared.exception.*;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
 import org.springframework.http.HttpStatus;
@@ -17,6 +14,16 @@ import java.util.List;
 
 @RestControllerAdvice
 public class CoverRestControllerExceptionHandler {
+
+    /*
+     * Более менее корректная обработка
+     * Лучше конкретизировать ошибки, но на данный момент допускаю такую реализация из-за
+     * ограничения времени на реализацию проекта
+     */
+    @ExceptionHandler(ObjectStorageException.class)
+    public ResponseEntity<ProblemDetail> handle(ObjectStorageException ex) {
+        return buildResponseEntity(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage());
+    }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ProblemDetail> handle(ConstraintViolationException ex) {

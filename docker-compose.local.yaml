@@ -40,6 +40,7 @@ services:
     depends_on:
       - auth-postgres
       - cover-postgres
+      - minio
     build:
       context: .
       dockerfile: Dockerfile
@@ -49,5 +50,9 @@ services:
     environment:
       AUTH_POSTGRES_URL: jdbc:postgresql://auth-postgres:5440/auth
       COVER_POSTGRES_URL: jdbc:postgresql://cover-postgres:5441/auth
+
+      MINIO_ENDPOINT: ${MINIO_ENDPOINT}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
     ports:
       - "8080:8080"

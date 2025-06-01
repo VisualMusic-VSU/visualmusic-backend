@@ -1,6 +1,8 @@
 package app.visualmusic.cover.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -9,5 +11,7 @@ public class Cover {
     @EqualsAndHashCode.Include
     private Long id;
 
-    private String imageUrl;
+    private String bucket;
+
+    private String object;
 }

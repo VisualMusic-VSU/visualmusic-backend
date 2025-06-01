@@ -42,6 +42,7 @@ services:
     depends_on:
       - auth-postgres
       - cover-postgres
+      - minio
     image: ghcr.io/${ORG_NAME}:${SHORT_SHA}
     container_name: visualmusic-app
     environment:
@@ -53,5 +54,9 @@ services:
 
       AUTH_POSTGRES_URL: ${AUTH_POSTGRES_URL}
       COVER_POSTGRES_URL: ${COVER_POSTGRES_URL}
+
+      MINIO_ENDPOINT: ${MINIO_ENDPOINT}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
     ports:
       - "${VISUALMUSIC_APP_PORT}:8080"

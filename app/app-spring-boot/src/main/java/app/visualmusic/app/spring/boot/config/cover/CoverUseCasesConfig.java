@@ -29,10 +29,7 @@ import app.visualmusic.cover.port.input.usecase.group.saved.GetSavedGroupUseCase
 import app.visualmusic.cover.port.input.usecase.group.saved.RemoveSavedGroupUseCase;
 import app.visualmusic.cover.port.input.usecase.proxy.spring.transactional.*;
 import app.visualmusic.cover.port.input.util.RequestValidator;
-import app.visualmusic.cover.port.output.AuthServiceOutputPort;
-import app.visualmusic.cover.port.output.CoverOutputPort;
-import app.visualmusic.cover.port.output.GroupOutputPort;
-import app.visualmusic.cover.port.output.ReferenceOutputPort;
+import app.visualmusic.cover.port.output.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +43,7 @@ public class CoverUseCasesConfig {
     private final CoverOutputPort coverOutputPort;
     private final GroupOutputPort groupOutputPort;
     private final ReferenceOutputPort referenceOutputPort;
+    private final CoverImageOutputPort coverImageOutputPort;
 
     private final GroupMapper groupMapper;
 
@@ -56,7 +54,7 @@ public class CoverUseCasesConfig {
 
     @Bean
     public DeleteCoverInputPort deleteCoverUseCase() {
-        return new DeleteCoverUseCase(coverOutputPort);
+        return new DeleteCoverUseCase(coverOutputPort, coverImageOutputPort);
     }
 
     @Bean
@@ -69,7 +67,7 @@ public class CoverUseCasesConfig {
 
     @Bean
     public DeleteGenCoverInputPort deleteGenCoverUseCase() {
-        return new DeleteGenCoverUseCase(groupOutputPort, coverOutputPort);
+        return new DeleteGenCoverUseCase(groupOutputPort, coverOutputPort, coverImageOutputPort);
     }
 
     @Bean
@@ -82,7 +80,7 @@ public class CoverUseCasesConfig {
 
     @Bean
     public DeleteGenGroupInputPort deleteGenGroupUseCase() {
-        return new DeleteGenGroupUseCase(groupOutputPort);
+        return new DeleteGenGroupUseCase(groupOutputPort, coverOutputPort, coverImageOutputPort);
     }
 
     @Bean
@@ -95,7 +93,7 @@ public class CoverUseCasesConfig {
 
     @Bean
     public GetAllGenGroupsInputPort getAllGenGroupsUseCase() {
-        return new GetAllGenGroupsUseCase(groupOutputPort, authServiceOutputPort, groupMapper);
+        return new GetAllGenGroupsUseCase(groupOutputPort, authServiceOutputPort, coverImageOutputPort, groupMapper);
     }
 
     @Bean
@@ -110,7 +108,7 @@ public class CoverUseCasesConfig {
 
     @Bean
     public GetAllPublicGroupsInputPort getAllPublicGroupsUseCase(RequestValidator requestValidator) {
-        return new GetAllPublicGroupsUseCase(groupOutputPort, requestValidator, groupMapper);
+        return new GetAllPublicGroupsUseCase(groupOutputPort, coverImageOutputPort, requestValidator, groupMapper);
     }
 
     @Bean
@@ -120,7 +118,7 @@ public class CoverUseCasesConfig {
 
     @Bean
     public GetAllSavedGroupsInputPort getAllSavedGroupsInputPort() {
-        return new GetAllSavedGroupsUseCase(groupOutputPort, authServiceOutputPort, groupMapper);
+        return new GetAllSavedGroupsUseCase(groupOutputPort, authServiceOutputPort, coverImageOutputPort, groupMapper);
     }
 
     @Bean
@@ -143,7 +141,7 @@ public class CoverUseCasesConfig {
 
     @Bean
     public DeleteGroupInputPort deleteGroupUseCase() {
-        return new DeleteGroupUseCase(groupOutputPort);
+        return new DeleteGroupUseCase(groupOutputPort, coverOutputPort, coverImageOutputPort);
     }
 
     @Bean
@@ -156,6 +154,6 @@ public class CoverUseCasesConfig {
 
     @Bean
     public GetAllGroupsInputPort getAllGroupsUseCase(RequestValidator requestValidator) {
-        return new GetAllGroupsUseCase(groupOutputPort, requestValidator, groupMapper);
+        return new GetAllGroupsUseCase(groupOutputPort, coverImageOutputPort, requestValidator, groupMapper);
     }
 }
