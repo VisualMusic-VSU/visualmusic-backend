@@ -91,6 +91,10 @@ jobs:
           echo "MINIO_ROOT_PASSWORD=${{ secrets.MINIO_ROOT_PASSWORD }}" >> ./visualmusic/backend/develop/.env
           echo "MINIO_S3_PORT=${{ secrets.MINIO_S3_PORT }}" >> ./visualmusic/backend/develop/.env
           echo "MINIO_CONSOLE_PORT=${{ secrets.MINIO_CONSOLE_PORT }}" >> ./visualmusic/backend/develop/.env
+        
+          echo "MINIO_ENDPOINT=${{ secrets.MINIO_ENDPOINT }}" >> ./visualmusic/backend/develop/.env
+          echo "MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}" >> ./visualmusic/backend/develop/.env
+          echo "MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}" >> ./visualmusic/backend/develop/.env
           
           echo "JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./visualmusic/backend/develop/.env
           echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./visualmusic/backend/develop/.env
